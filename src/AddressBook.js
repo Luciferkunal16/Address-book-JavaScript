@@ -163,6 +163,23 @@ function addContact(firstName,lastName,address,city,state,zip,phoneNumber,email)
     else 
     addressBookArray.push(new Contact(firstName,lastName,address,city,state,zip,phoneNumber,email));
 }
+function searchContactByCity(firstName, city) {
+    return addressBookArray.filter((contact) => contact.city == city && contact.firstName == firstName);
+}
+  
+function searchContactByState(firstName, state) {
+    return addressBookArray.filter((contact) => contact.state == state && contact.firstName == firstName);
+}
+
+function viewContactsByCity(city){
+    return addressBookArray.filter((contact) => contact.city == city);
+}
+
+function viewContactsByState(state){
+    return addressBookArray.filter((contact) => contact.state == state);
+}
+
+
 let firstContact=new Contact("Kunal", "Batham", "26048", "Noida", "UttarPradesh", "209 601", "91 9481555555", "kunal@gmail.com");
 let secondContact=new Contact("Nikhil","Verma","45678","Delhi","Delhi","789 233","91 8970654321","nikhil@gmail.com");
 try{
@@ -185,12 +202,21 @@ console.log("Count of contact=")
 console.log(addressBookArray.reduce(countOfContacts, 0))
 
 
-deleteContact("Kunal","Batham")
-console.log("\nAfter Delete")
-console.log(addressBookArray.toString());
+// deleteContact("Kunal","Batham")
+// console.log("\nAfter Delete")
+// console.log(addressBookArray.toString());
 console.log("\nAdding Duplicate Contact");
 try {
     addContact("Nikhil","Verma","dsadd","florid","UTTAR","209 888","91 899898989","nikhio@gmail.com");
 } catch (e) {
     console.error(e);
 }
+
+console.log("Search By city ");
+console.log(searchContactByCity("Nikhil","Delhi").toString());
+console.log("Search By state");
+console.log(searchContactByState("Kunal","UttarPradesh").toString());
+console.log("view By city");
+console.log(viewContactsByCity("Kanpur").toString())
+console.log("View By State")
+console.log(viewContactsByState("UttarPradesh").toString())
