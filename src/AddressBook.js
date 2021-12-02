@@ -4,10 +4,9 @@ const cityStateRegex = RegExp('^[a-zA-z]{4,}$');
 const zipRegex = RegExp("^[0-9]{3}\\s{0,1}[0-9]{3}$");
 const phoneNumberRegex = RegExp("^[0-9]{2}\\s{1}[0-9]{10}$");
 const emailRegex = RegExp("^[a-zA-Z]+[a-zA-Z0-9]*[- . + _]?[a-zA-Z0-9]+[@]{1}[a-z0-9]+[.]{1}[a-z]+[.]?[a-z]+$");
+class Contact {
 
-class ContactPerson{
-
-    constructor(...params){
+    constructor(...params) {
         this.firstName = params[0];
         this.lastName = params[1];
         this.address = params[2];
@@ -18,109 +17,148 @@ class ContactPerson{
         this.email = params[7];
     }
 
-    get firstName(){
+    get firstName() {
         return this._firstName;
     }
 
-    get lastName(){
+    get lastName() {
         return this._lastName;
     }
 
-    get address(){
+    get address() {
         return this._address;
     }
 
-    get city(){
+    get city() {
         return this._city;
     }
 
-    get state(){
+    get state() {
         return this._state;
     }
 
-    get zip(){
+    get zip() {
         return this._zip;
     }
 
-    get phoneNumber(){
+    get phoneNumber() {
         return this._phoneNumber;
     }
 
-    get email(){
+    get email() {
         return this._email;
     }
 
-    set firstName(firstName){
+    set firstName(firstName) {
         if (nameRegex.test(firstName))
             this._firstName = firstName;
         else
-            throw "FIRST NAME is Incorrect ";
+            throw "**** FIRST NAME is Incorrect ****";
     }
 
-    set lastName(lastName){
+    set lastName(lastName) {
         if (nameRegex.test(lastName))
             this._lastName = lastName;
         else
-            throw " LAST NAME is Incorrect ";
+            throw "**** LAST NAME is Incorrect ****";
     }
 
-    set address(address){
+    set address(address) {
         if (addressRegex.test(address))
             this._address = address;
         else
-            throw "ADDRESS is Incorrect";
+            throw "**** ADDRESS is Incorrect ****";
     }
 
-    set city(city){
+    set city(city) {
         if (cityStateRegex.test(city))
             this._city = city;
         else
-            throw "CITY is Incorrect";
+            throw "**** CITY is Incorrect ****";
     }
 
-    set state(state){
+    set state(state) {
         if (cityStateRegex.test(state))
             this._state = state;
         else
-            throw " STATE is Incorrect ";
+            throw "**** STATE is Incorrect ****";
     }
 
-    set zip(zip){
+    set zip(zip) {
         if (zipRegex.test(zip))
             this._zip = zip;
         else
-            throw " ZIP is Incorrect";
+            throw "**** ZIP is Incorrect ****";
     }
 
-    set phoneNumber(phoneNumber){
+    set phoneNumber(phoneNumber) {
         if (phoneNumberRegex.test(phoneNumber))
             this._phoneNumber = phoneNumber;
         else
-            throw " PHONE NUMBER is Incorrect ";
+            throw "**** PHONE NUMBER is Incorrect ****";
     }
 
-    set email(email){
+    set email(email) {
         if (emailRegex.test(email))
             this._email = email;
         else
-            throw "EMAIL ADDRESS is Incorrect ";
+            throw "**** EMAIL ADDRESS is Incorrect ****";
     }
-    
-    toString(){
-        return "First Name : "+ this.firstName + ", Last Name : "+ this.lastName + ", Address : " + this.address + ", City : "+ this.city + ", State : "+ this.state +", Zip : "+ this.zip+ ", Phone Number : "+ this.phoneNumber + ", Email : "+ this.email;
+
+    toString() {
+        return "First Name : " + this.firstName + ", Last Name : " + this.lastName + ", Address : " + this.address + ", City : " + this.city + ", State : " + this.state + ", Zip : " + this.zip + ", Phone Number : " + this.phoneNumber + ", Email : " + this.email;
     }
 }
-let contactArray=new Array();
+
+let addressBookArray = new Array();
+
+function contactExists(firstName, lastName) {
+    return addressBookArray.some(contact => contact.firstName == firstName && contact.lastName == lastName);
+}
+
+function editContact(firstName, lastName, property, newValue) {
+    if (contactExists(firstName, lastName)) {
+        switch (property) {
+            case "address":
+                addressBookArray.find((contact) => contact.firstName == firstName).address = newValue;
+                break;
+            case "city":
+                addressBookArray.find((contact) => contact.firstName == firstName).city = newValue;
+                break;
+            case "state":
+                addressBookArray.find((contact) => contact.firstName == firstName).state = newValue;
+                break;
+            case "zip":
+                addressBookArray.find((contact) => contact.firstName == firstName).zip = newValue;
+                break;
+            case "phoneNumber":
+                addressBookArray.find((contact) => contact.firstName == firstName).phoneNumber = newValue;
+                break;
+            case "email":
+                addressBookArray.find((contact) => contact.firstName == firstName).email = newValue;
+                break;
+            default:
+                console.log("Enter valid property");
+        }
+    }
+    else {
+        console.log("Contact Does Not Exist");
+    }
+}
+
 try{
 
 
-    let contact = new ContactPerson("Kunal", "Batham", "26048", "Noida", "UttarPradesh", "209 601", "91 9481555555", "kunal@gmail.com");
-    contactArray.push(contact);
+    let contact = new Contact("Kunal", "Batham", "26048", "Noida", "UttarPradesh", "209 601", "91 9481555555", "kunal@gmail.com");
+    addressBookArray.push(contact);
     
-    contactArray.push(new ContactPerson("Nikhil","Batham","45678","Delhi","Delhi","789 233","91 8970654321","nikhil@gmail.com"));
+    addressBookArray.push(new Contact("Nikhil","Batham","45678","Delhi","Delhi","789 233","91 8970654321","nikhil@gmail.com"));
    
 }
 catch(e){
     console.log(e);
 }
-console.log(contactArray.toString());
+console.log(addressBookArray.toString());
+console.log("\nAfter Editing Contact")
+editContact("Kunal", "Batham", "city", "Kodagu");
+console.log(addressBookArray.toString());
