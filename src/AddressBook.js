@@ -178,7 +178,13 @@ function viewContactsByCity(city){
 function viewContactsByState(state){
     return addressBookArray.filter((contact) => contact.state == state);
 }
+function getCountOfContactsByCity(city){
+    return addressBookArray.filter((contact) => contact.city == city).length;
+}
 
+function getCountOfContactsByState(state){
+    return addressBookArray.filter((contact) => contact.state == state).length;
+}
 
 let firstContact=new Contact("Kunal", "Batham", "26048", "Noida", "UttarPradesh", "209 601", "91 9481555555", "kunal@gmail.com");
 let secondContact=new Contact("Nikhil","Verma","45678","Delhi","Delhi","789 233","91 8970654321","nikhil@gmail.com");
@@ -220,3 +226,9 @@ console.log("view By city");
 console.log(viewContactsByCity("Kanpur").toString())
 console.log("View By State")
 console.log(viewContactsByState("UttarPradesh").toString())
+
+
+console.log("Count by City")
+console.log(getCountOfContactsByCity("Kanpur").toString())
+console.log("Count by State")
+console.log(getCountOfContactsByState("Delhi").toString())
