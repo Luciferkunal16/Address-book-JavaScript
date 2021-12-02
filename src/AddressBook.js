@@ -105,16 +105,22 @@ class ContactPerson{
         else
             throw "EMAIL ADDRESS is Incorrect ";
     }
-
+    
     toString(){
         return "First Name : "+ this.firstName + ", Last Name : "+ this.lastName + ", Address : " + this.address + ", City : "+ this.city + ", State : "+ this.state +", Zip : "+ this.zip+ ", Phone Number : "+ this.phoneNumber + ", Email : "+ this.email;
     }
 }
-
+let contactArray=new Array();
 try{
+
+
     let contact = new ContactPerson("Kunal", "Batham", "26048", "Noida", "UttarPradesh", "209 601", "91 9481555555", "kunal@gmail.com");
-    console.log(contact.toString());
+    contactArray.push(contact);
+    
+    contactArray.push(new ContactPerson("Nikhil","Batham","45678","Delhi","Delhi","789 233","91 8970654321","nikhil@gmail.com"));
+   
 }
 catch(e){
     console.log(e);
 }
+console.log(contactArray.toString());
