@@ -106,7 +106,7 @@ class Contact {
     }
 
     toString() {
-        return "First Name : " + this.firstName + ", Last Name : " + this.lastName + ", Address : " + this.address + ", City : " + this.city + ", State : " + this.state + ", Zip : " + this.zip + ", Phone Number : " + this.phoneNumber + ", Email : " + this.email;
+        return "First Name : " + this.firstName + ", Last Name : " + this.lastName + ", Address : " + this.address + ", City : " + this.city + ", State : " + this.state + ", Zip : " + this.zip + ", Phone Number : " + this.phoneNumber + ", Email : " + this.email+"\n";
     }
 }
 
@@ -185,14 +185,37 @@ function getCountOfContactsByCity(city){
 function getCountOfContactsByState(state){
     return addressBookArray.filter((contact) => contact.state == state).length;
 }
+function sortAddressBookByName(){
+    addressBookArray.sort((firstPerson, secondPerson) => (firstPerson.firstName).localeCompare(secondPerson.firstName));
+    console.log(addressBookArray.toString());
+}
+
+function sortAddressBookByCity(){
+    addressBookArray.sort((firstPerson, secondPerson) => (firstPerson.city).localeCompare(secondPerson.city));
+    console.log(addressBookArray.toString());
+}
+
+function sortAddressBookByState(){
+    addressBookArray.sort((firstPerson, secondPerson) => (firstPerson.state).localeCompare(secondPerson.state));
+    console.log(addressBookArray.toString());
+}
+
+function sortAddressBookByZip(){
+    addressBookArray.sort((firstPerson, secondPerson) => (firstPerson.zip).localeCompare(secondPerson.zip));
+    console.log(addressBookArray.toString());
+}
 
 let firstContact=new Contact("Kunal", "Batham", "26048", "Noida", "UttarPradesh", "209 601", "91 9481555555", "kunal@gmail.com");
 let secondContact=new Contact("Nikhil","Verma","45678","Delhi","Delhi","789 233","91 8970654321","nikhil@gmail.com");
+let thirdContact=new Contact("Neha","Rani","233444","Patna","Bihar","345 443", "91 8888864666","nhehe@gmail.com");
+let fourthContact=new Contact("Rahul","Chaurasia","2dbb444","Shimla","Himachal","123 443", "91 8488486666","rahul@gmail.com");
 try{
 
     addressBookArray.push(firstContact);
     
     addressBookArray.push(secondContact);
+    addressBookArray.push(thirdContact);
+    addressBookArray.push(fourthContact);
    
 }
 catch(e){
@@ -232,3 +255,14 @@ console.log("Count by City")
 console.log(getCountOfContactsByCity("Kanpur").toString())
 console.log("Count by State")
 console.log(getCountOfContactsByState("Delhi").toString())
+
+
+console.log("\nSorted  Contacts are");
+console.log("\nSorted By name")
+sortAddressBookByName();
+console.log("\nSorted By city")
+sortAddressBookByCity();
+console.log("\nSorted By State")
+sortAddressBookByState();
+console.log("\nSorted BY zip code")
+sortAddressBookByZip()
