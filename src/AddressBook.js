@@ -156,14 +156,20 @@ function countOfContacts(count) {
     count += 1;
     return count;
 }
-
+function addContact(firstName,lastName,address,city,state,zip,phoneNumber,email) {
+    if (addressBookArray.some(contact=>contact.firstName==firstName)){
+        console.error("Already Exist")
+    }
+    else 
+    addressBookArray.push(new Contact(firstName,lastName,address,city,state,zip,phoneNumber,email));
+}
+let firstContact=new Contact("Kunal", "Batham", "26048", "Noida", "UttarPradesh", "209 601", "91 9481555555", "kunal@gmail.com");
+let secondContact=new Contact("Nikhil","Verma","45678","Delhi","Delhi","789 233","91 8970654321","nikhil@gmail.com");
 try{
 
-
-    let contact = new Contact("Kunal", "Batham", "26048", "Noida", "UttarPradesh", "209 601", "91 9481555555", "kunal@gmail.com");
-    addressBookArray.push(contact);
+    addressBookArray.push(firstContact);
     
-    addressBookArray.push(new Contact("Nikhil","Verma","45678","Delhi","Delhi","789 233","91 8970654321","nikhil@gmail.com"));
+    addressBookArray.push(secondContact);
    
 }
 catch(e){
@@ -182,4 +188,9 @@ console.log(addressBookArray.reduce(countOfContacts, 0))
 deleteContact("Kunal","Batham")
 console.log("\nAfter Delete")
 console.log(addressBookArray.toString());
-console
+console.log("\nAdding Duplicate Contact");
+try {
+    addContact("Nikhil","Verma","dsadd","florid","UTTAR","209 888","91 899898989","nikhio@gmail.com");
+} catch (e) {
+    console.error(e);
+}
